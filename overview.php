@@ -11,7 +11,7 @@
 
 <h1>Books - track your collection of books you've read</h1>
 <form>
-    <button name = "submit" id = "submit">Add Book</button>
+    <a href="?action=create">Add Book</a>
 </form>
 <ul>
     <?php foreach ($books as $book) : ?>

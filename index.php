@@ -21,18 +21,21 @@ $databaseManager->connect();
 
 // Get the current action to execute
 // If nothing is specified, it will remain empty (home should be loaded)
-// $action = $_GET['action'] ?? null;
-$page = $_SERVER["REQUEST_URI"];
-$BASE_PATH = "localhost/07.CRUD/";
+$action = $_GET['action'] ?? null;
+// $page = $_SERVER["REQUEST_URI"];
+// $BASE_PATH = "localhost/07.CRUD/";
 
 // Load the relevant action
 // This system will help you to only execute the code you want, instead of all of it (or complex if statements)
-switch ($page) {
-    case $BASE_PATH . 'create':
+switch ($action) {
+    case 'create':
         create($databaseManager);
         break;
-    case $BASE_PATH . 'edit':
+    case 'edit':
         echo "Editing ...";
+        break;
+    case 'delete' :
+        delete($databaseManager);
         break;
     default:
         overview($databaseManager);
@@ -54,7 +57,6 @@ function create($databaseManager)
     if(isset($_POST['submit'])) {
             $cardRepository = new CardRepository($databaseManager);
             $cardRepository->create();
-    }
-    require 'createView.php';
-    // TODO: provide the create logic
+            overview($databaseManager);
+    } else require 'createView.php';
 }

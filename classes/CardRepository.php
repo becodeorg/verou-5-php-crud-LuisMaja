@@ -15,7 +15,22 @@ class CardRepository
 
     public function create(): void
     {
-        echo "Alazellaz";
+        if (isset($_POST['submit'])) {
+            // Retrieve the values from the form
+            $name = $_POST['bookName'];
+            $type = $_POST['bookType'];
+
+            // Create an SQL query to insert a new record into the "books" table
+            $query = "INSERT INTO books (name, type) VALUES (:name, :type)";
+            $statement = $this->databaseManager->connection->prepare($query);
+
+            // Bind parameters
+            $statement->bindParam(':name', $name);
+            $statement->bindParam(':type', $type);
+
+            // Execute the query
+            $statement->execute();
+        }
     }
 
     // Get one
@@ -47,7 +62,7 @@ class CardRepository
 
     public function delete(): void
     {
-
+       //$query = DELETE FROM 'books' WHERE id = //find way to get id of selected item
     }
 
 }
