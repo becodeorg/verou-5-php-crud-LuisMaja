@@ -15,7 +15,7 @@ class CardRepository
 
     public function create(): void
     {
-
+        echo "Alazellaz";
     }
 
     // Get one
@@ -28,14 +28,14 @@ class CardRepository
     public function get(): array
     {
         // TODO: Create an SQL query
+        $query = "SELECT * FROM books";
         // TODO: Use your database connection (see $databaseManager) and send your query to your database.
+        $statement = $this->databaseManager->connection->prepare($query);
         // TODO: fetch your data at the end of that action.
+        $statement->execute();
         // TODO: replace dummy data by real one
-        return [
-            ['name' => 'dummy one'],
-            ['name' => 'dummy two'],
-        ];
-
+        return $statement->fetchAll();
+        
         // We get the database connection first, so we can apply our queries with it
         // return $this->databaseManager->connection-> (runYourQueryHere)
     }
